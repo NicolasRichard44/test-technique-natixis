@@ -5,6 +5,13 @@ target/
 !**/src/test/**/target/
 
 ### Angular ###
+task-management-front/dist/
+task-management-front/node_modules/
+task-management-front/.angular/
+task-management-front/.vscode/
+task-management-front/coverage/
+task-management-front/.env
+# Original entries kept for backward compatibility
 front/dist/
 front/node_modules/
 front/.angular/
