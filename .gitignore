@@ -1,0 +1,30 @@
+### Java ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### Angular ###
+front/dist/
+front/node_modules/
+front/.angular/
+front/.vscode/
+front/coverage/
+front/.env
+
+### IDEs ###
+.idea/
+*.iws
+*.iml
+*.ipr
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+
+### Misc ###
+.env
+*.log
+.DS_Store
+Thumbs.db
