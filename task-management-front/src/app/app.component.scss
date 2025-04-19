@@ -1,0 +1,32 @@
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.main-content {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+mat-toolbar {
+  button {
+    margin-left: 8px;
+    
+    &:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    &.active {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+// Animation styles for route transitions
+:host {
+  display: block;
+  position: relative;
+  min-height: 100vh;
+}

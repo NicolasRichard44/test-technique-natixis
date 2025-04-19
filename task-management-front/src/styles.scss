@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html, body { 
+  height: 100%; 
+  margin: 0;
+}
+
+body { 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
+}
+
+.mat-mdc-table {
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1) !important;
+}
+
+.mat-mdc-card {
+  box-shadow: 0 2px 4px rgba(0,0,0,.1) !important;
+}
+
+.mat-mdc-button-toggle-group {
+  box-shadow: none !important;
+  border: 1px solid #e0e0e0 !important;
+}
+
+.mat-column-actions {
+  text-align: right !important;
+}
+
+.mat-column-completed {
+  text-align: center !important;
+}
+
+.error-message {
+  color: #f44336; /* Rouge standard de Material Design */
+  background-color: #ffebee; /* Rouge clair */
+  border: 1px solid #ffcdd2; /* Rouge très clair */
+  border-radius: 4px;
+  padding: 16px;
+  margin: 16px 0;
+}

@@ -1,0 +1,87 @@
+<div class="task-list-container" role="main" aria-label="Task List">
+  <mat-button-toggle-group (change)="onFilterChange($event.value)" [value]="filterValue" 
+                          aria-label="Filter tasks by status">
+    <mat-button-toggle value="all">All Tasks</mat-button-toggle>
+    <mat-button-toggle value="pending">Pending</mat-button-toggle>
+    <mat-button-toggle value="completed">Completed</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <div *ngIf="error" class="error-message" role="alert">{{ error }}</div>
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+  <ng-container *ngIf="!isLoading && !error">
+    <div *ngIf="tasks.length === 0" class="empty-state">
+      <mat-card>
+        <mat-card-content>
+          <mat-icon class="empty-icon" aria-hidden="true">assignment</mat-icon>
+          <h2>No tasks found</h2>
+          <p>{{ getEmptyStateMessage() }}</p>
+          <button mat-raised-button color="primary" routerLink="/tasks/new" 
+                  aria-label="Create new task">
+            <mat-icon aria-hidden="true">add</mat-icon>
+            Create New Task
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="keyboard-instructions" role="note">
+      <p>Use ↑↓ arrow keys to navigate tasks, Enter to view details, and Space to toggle completion status.</p>
+    </div>
+    <table *ngIf="tasks.length > 0" mat-table [dataSource]="tasks" class="mat-elevation-z8" 
+           aria-label="Task list table"
+           tabindex="0">
+      <ng-container matColumnDef="label">
+        <th mat-header-cell *matHeaderCellDef id="label-header">Label</th>
+        <td mat-cell *matCellDef="let task" [attr.aria-labelledby]="'label-header'">
+          {{ task.label }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef id="description-header">Description</th>
+        <td mat-cell *matCellDef="let task" [attr.aria-labelledby]="'description-header'">
+          {{ task.description }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="completed">
+        <th mat-header-cell *matHeaderCellDef id="status-header">Status</th>
+        <td mat-cell *matCellDef="let task" [attr.aria-labelledby]="'status-header'">
+          <mat-checkbox
+            [checked]="task.completed"
+            (change)="toggleTaskStatus(task)"
+            color="primary"
+            [attr.aria-label]="'Mark task ' + task.label + ' as ' + (task.completed ? 'incomplete' : 'complete')">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef id="actions-header">Actions</th>
+        <td mat-cell *matCellDef="let task" [attr.aria-labelledby]="'actions-header'">
+          <button mat-button color="primary" [routerLink]="['/tasks', task.id]"
+                  [attr.aria-label]="'View details of task ' + task.label">
+            View Details
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index"
+          [attr.data-row-index]="i"
+          [class.selected]="i === selectedRowIndex"
+          (click)="onRowClick(i)"
+          [attr.aria-selected]="i === selectedRowIndex"
+          [attr.aria-label]="'Task: ' + row.label"></tr>
+    </table>
+
+    <mat-paginator
+      [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageIndex]="currentPage"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="onPageChange($event)"
+      aria-label="Select page of tasks">
+    </mat-paginator>
+  </ng-container>
+  <app-back-to-top />
+</div>

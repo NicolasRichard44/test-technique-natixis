@@ -1,0 +1,24 @@
+<nav class="app-nav">
+  <mat-toolbar color="primary">
+    <span>{{ title }}</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-button routerLink="/tasks" 
+            routerLinkActive="active"
+            (keydown.arrowRight)="focusNewTaskButton()"
+            aria-label="View task list">
+      <mat-icon>list</mat-icon>
+      Tasks
+    </button>
+    <button mat-raised-button color="accent" routerLink="/tasks/new" 
+            routerLinkActive="active"
+            (keydown.arrowLeft)="focusTaskListButton()"
+            aria-label="Create new task">
+      <mat-icon>add</mat-icon>
+      New Task
+    </button>
+  </mat-toolbar>
+</nav>
+
+<main class="main-content" [@routeAnimations]="prepareRoute(outlet)" role="main">
+  <router-outlet #outlet="outlet" />
+</main>
