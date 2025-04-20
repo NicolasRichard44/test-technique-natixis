@@ -1,115 +1,135 @@
-# TaskManagementFront
+# Task Management System
 
-Cette application web Angular constitue le frontend de notre système de gestion de tâches. Elle permet aux utilisateurs de créer, visualiser, modifier et supprimer des tâches dans une interface intuitive et responsive.
+Ce projet est une application complète de gestion de tâches, construite avec une architecture moderne full-stack :
+- **Frontend** : Angular (version 19)
+- **Backend** : Spring Boot (version 3.2.3)
 
-## À propos de l'application
-
-Notre application de gestion de tâches est conçue selon une architecture moderne avec:
-- Un frontend Angular (ce projet)
-- Un backend Spring Boot RESTful API 
-
-### Fonctionnalités principales
-
-- Tableau de bord des tâches avec visualisation claire
-- Création, modification et suppression de tâches
-- Filtrage et tri des tâches par différents critères
-- Changement de statut des tâches (À faire, En cours, Terminée)
-- Interface responsive adaptée à tous les appareils
-
-## Prérequis
-
-- Node.js (version 16 ou supérieure)
-- NPM (version 8 ou supérieure)
-- Angular CLI (version 19.x)
-- Le backend Spring Boot doit être en cours d'exécution pour que l'application fonctionne correctement
-
-## Installation
-
-1. Clonez ce dépôt
-2. Naviguez vers le répertoire du projet
-3. Installez les dépendances:
-
-```bash
-npm install
-```
-
-## Configuration
-
-Le fichier `src/environments/environment.ts` contient les paramètres de configuration, notamment l'URL de l'API backend. Assurez-vous que cette URL correspond à l'adresse où votre backend Spring Boot est en cours d'exécution.
-
-## Développement
-
-Pour démarrer un serveur de développement local, exécutez:
-
-```bash
-ng serve
-```
-
-Une fois le serveur en cours d'exécution, ouvrez votre navigateur et accédez à `http://localhost:4200/`. L'application se rechargera automatiquement si vous modifiez l'un des fichiers source.
+L'application permet de créer, lister, et gérer des tâches via une interface utilisateur locale accessible via un navigateur.
 
 ## Structure du projet
 
+Le projet est divisé en deux parties principales:
+
 ```
-src/
-├── app/
-│   ├── components/     # Composants réutilisables
-│   ├── models/         # Interfaces et classes de modèles
-│   ├── services/       # Services pour la communication avec l'API
-│   ├── shared/         # Ressources partagées (pipes, directives, etc.)
-│   └── ...
-├── assets/            # Images, fichiers statiques
-├── environments/      # Configuration selon l'environnement
-└── ...
+task-management-back/     # Backend Spring Boot
+task-management-front/    # Frontend Angular
 ```
 
+## Backend (Spring Boot)
 
-## Build
+### Technologies utilisées
 
-Pour compiler le projet, exécutez:
+- **Spring Boot** : 3.2.3
+- **Java** : 21
+- **Spring Security** : Pour la configuration de sécurité
+- **Lombok** : Pour réduire le code boilerplate
+- **SpringDoc OpenAPI** : Pour la documentation API
+- **JaCoCo** : Pour la couverture de tests
+
+### Architecture
+
+Le backend est structuré selon les principes d'architecture hexagonale (ports et adaptateurs):
+
+```
+fr.natixis
+├── api/                  # Contrôleurs REST et DTOs
+├── config/               # Configuration Spring
+├── core/                 # Logique métier
+│   ├── application/      # Services d'application
+│   ├── domain/           # Entités métier
+│   └── ports/            # Interfaces pour l'infrastructure
+└── infrastructure/       # Implémentations des ports
+    └── persistence/      # Stockage des données
+```
+
+### API REST
+
+Le backend expose les endpoints suivants:
+
+- `GET /api/tasks` - Récupérer toutes les tâches (avec filtres et pagination)
+- `GET /api/tasks/{id}` - Récupérer une tâche par son ID
+- `POST /api/tasks` - Créer une nouvelle tâche
+- `PUT /api/tasks/{id}/status` - Mettre à jour le statut d'une tâche
+
+La documentation complète de l'API est disponible via Swagger UI: `http://localhost:8080/swagger-ui.html`
+
+### Démarrer le backend
+
+1. Assurez-vous d'avoir Java 21 installé
+2. Naviguez vers le répertoire du backend:
+   ```bash
+   cd task-management-back
+   ```
+3. Lancez l'application avec Maven:
+   ```bash
+   mvn spring-boot:run
+   ```
+
+Le serveur démarre sur `http://localhost:8080`
+
+### Exécuter les tests
 
 ```bash
-ng build
+mvn test
 ```
 
-Les artefacts de build seront stockés dans le répertoire `dist/`. Par défaut, la build de production optimise votre application pour la performance et la vitesse.
+Le rapport de couverture JaCoCo sera généré dans `target/site/jacoco/index.html`
 
-## Tests unitaires
+## Frontend (Angular)
 
-Pour exécuter les tests unitaires avec [Karma](https://karma-runner.github.io), utilisez la commande suivante:
+### Technologies utilisées
+
+- **Angular**: version 19
+- **Angular Material**: Pour les composants UI
+- **RxJS**: Pour la programmation réactive
+
+### Fonctionnalités
+
+- Tableau de bord des tâches avec pagination
+- Filtrage des tâches (toutes, en cours, terminées)
+- Création de nouvelles tâches
+- Affichage des détails d'une tâche
+- Changement du statut d'une tâche (terminée/non terminée)
+
+### Prérequis
+
+- Node.js (version 18 ou supérieure)
+- NPM (version 8 ou supérieure)
+- Angular CLI (version 19.x)
+
+### Démarrer le frontend
+
+1. Naviguez vers le répertoire du frontend:
+   ```bash
+   cd task-management-front
+   ```
+2. Installez les dépendances:
+   ```bash
+   npm install
+   ```
+3. Lancez l'application:
+   ```bash
+   ng serve
+   ```
+
+L'application sera accessible à `http://localhost:4200`
+
+### Exécuter les tests
 
 ```bash
 ng test
 ```
 
-## Tests end-to-end
+## Fonctionnement de l'application complète
 
-Pour les tests end-to-end (e2e), exécutez:
+1. Démarrez le backend Spring Boot (port 8080)
+2. Démarrez le frontend Angular (port 4200)
+3. Accédez à l'application via `http://localhost:4200`
 
-```bash
-ng e2e
-```
+## Développeur
 
-Angular CLI n'est pas livré avec un framework de test end-to-end par défaut. Vous pouvez choisir celui qui convient à vos besoins.
+Ce projet a été développé par Nicolas RICHARD dans le cadre d'un test technique pour Natixis.
 
-## Déploiement
+## Licence
 
-Pour déployer l'application en production:
-
-1. Créez une build de production:
-```bash
-ng build --configuration production
-```
-
-2. Déployez le contenu du dossier `dist/` sur votre serveur web
-
-## Ressources supplémentaires
-
-Pour plus d'informations sur l'utilisation d'Angular CLI, y compris des références détaillées de commandes, visitez la page [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli).
-
-## Contribution
-
-Pour contribuer à ce projet, veuillez:
-1. Créer une branche pour votre fonctionnalité
-2. Rédiger des tests pour vos changements
-3. Assurer que tous les tests passent
-4. Soumettre une pull request avec une description claire de vos modifications
+Propriétaire - Tous droits réservés
