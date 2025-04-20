@@ -15,9 +15,9 @@ import { of } from 'rxjs';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
-import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { BackToTopComponent } from '../../shared/back-to-top/back-to-top.component';
 import { Router } from '@angular/router';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-task-list',
@@ -34,7 +34,6 @@ import { Router } from '@angular/router';
     MatIconModule,
     RouterModule,
     LoadingSpinnerComponent,
-    ConfirmDialogComponent,
     BackToTopComponent
   ],
   templateUrl: './task-list.component.html',
