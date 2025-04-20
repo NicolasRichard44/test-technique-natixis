@@ -1,4 +1,4 @@
-package fr.natixis.core.application;
+package fr.natixis.core.application.api;
 
 import fr.natixis.core.domain.Task;
 import org.springframework.data.domain.Page;

@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -61,10 +62,19 @@ public class InMemoryTaskRepository implements TaskRepository {
         });
     }
 
-    private Page<Task> getPage(java.util.List<Task> taskList, PageRequest pageRequest) {
+    private <T> Page<T> getPage(java.util.List<T> content, PageRequest pageRequest) {
+        if (content.isEmpty()) {
+            return new PageImpl<>(Collections.emptyList(), pageRequest, 0);
+        }
+        
         int start = (int) pageRequest.getOffset();
-        int end = Math.min((start + pageRequest.getPageSize()), taskList.size());
-        var pageContent = taskList.subList(start, end);
-        return new PageImpl<>(pageContent, pageRequest, taskList.size());
+        int end = Math.min(start + pageRequest.getPageSize(), content.size());
+        
+
+        if (start >= content.size()) {
+            return new PageImpl<>(Collections.emptyList(), pageRequest, content.size());
+        }
+    
+        return new PageImpl<>(content.subList(start, end), pageRequest, content.size());
     }
 }

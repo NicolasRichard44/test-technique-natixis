@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.natixis.api.dto.StatusUpdate;
-import fr.natixis.core.application.TaskService;
+import fr.natixis.core.application.api.TaskService;
 import fr.natixis.core.domain.Task;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

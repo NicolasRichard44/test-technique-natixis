@@ -1,7 +1,7 @@
 package fr.natixis.api;
 
+import fr.natixis.core.application.api.TaskService;
 import fr.natixis.core.domain.Task;
-import fr.natixis.core.application.TaskService;
 import fr.natixis.api.dto.StatusUpdate;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

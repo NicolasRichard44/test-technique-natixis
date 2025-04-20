@@ -1,5 +1,6 @@
 package fr.natixis.core.application;
 
+import fr.natixis.core.application.api.TaskService;
 import fr.natixis.core.domain.Task;
 import fr.natixis.core.ports.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;
