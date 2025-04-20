@@ -1,5 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { TaskFormComponent } from './task-form.component';
 import { TaskService } from '../../services/task.service';
@@ -10,8 +14,17 @@ describe('TaskFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskFormComponent, HttpClientTestingModule],
-      providers: [TaskService]
+      imports: [
+        TaskFormComponent,
+        MatSnackBarModule,
+        NoopAnimationsModule
+      ],
+      providers: [
+        TaskService,
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        provideRouter([])
+      ]
     })
     .compileComponents();
 

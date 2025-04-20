@@ -9,14 +9,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { catchError, finalize, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import { BackToTopComponent } from '../../shared/back-to-top/back-to-top.component';
-import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
